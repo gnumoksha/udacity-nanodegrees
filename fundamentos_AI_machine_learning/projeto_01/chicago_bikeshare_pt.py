@@ -211,7 +211,12 @@ trip_duration_qty = len(trip_duration_list_sorted)
 min_trip = trip_duration_list_sorted[0]
 max_trip = trip_duration_list_sorted[-1]
 mean_trip = round(trip_duration_sum / trip_duration_qty)
-median_trip = trip_duration_list_sorted[trip_duration_qty // 2]
+if trip_duration_qty % 2 == 1:
+    median_trip = trip_duration_list_sorted[trip_duration_qty // 2]
+else:
+    end = trip_duration_qty // 2
+    start = end - 1
+    median_trip = (trip_duration_list_sorted[start] + trip_duration_list_sorted[end]) / 2
 
 
 print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
