@@ -83,16 +83,50 @@ input("Aperte Enter para continuar...")
 # Agora sabemos como acessar as features, vamos contar quantos Male (Masculinos) e Female (Femininos) o dataset tem
 # TAREFA 4
 # TODO: Conte cada gênero. Você não deveria usar uma função para isso.
-gender_list = column_to_list(data_list, -2)
-male = 0
-for item in gender_list:
-    if item == 'Male':
-        male += 1
+def reinvent_count(values: list, match_value: str) -> int:
+    """
+    Esta função visa reinventar a roda e criar um substituto simplista para
+    o método count disponível em listas do Python.
 
-female = 0
-for item in gender_list:
-    if item == 'Female':
-        female += 1
+    Isso é necessário porque aqueles que criaram esse curso pensaram que
+    seria interessante gastar tempo com isso em um curso de machine learning
+    para "treinar sua lógica de programação", ao invés de criarem melhores
+    exercícios que forcem o aluno a utilizar loops em estruturas de dados
+    mais complexas ou, melhor ainda, deixar essa linha de pensamento
+    para um curso de lógica de programação com Python.
+    Ademais, apesar de não informado nas instruções, não aceitarão seu código
+    se você utilizar a alternativa built-in do Python em *qualquer lugar*,
+    não só neste exercício.
+    :return: valor da contagem
+    :rtype: int
+    """
+    count_value = 0
+
+    for value in values:
+        if value == match_value:
+            count_value += 1
+
+    return count_value
+
+def reinvent_sum(values: list) -> float:
+    """
+    Esta função visa reinventar a roda e criar um substituto simplista para
+    a função sum do Python.
+
+    Para entender o porquê veja a função reinvent_count.
+    :return: somatório de todos os valores contidos em values
+    :rtype: float
+    """
+    result = 0
+
+    for value in values:
+        result += value
+
+    return float(result)
+
+gender_list = column_to_list(data_list, -2)
+male = reinvent_count(gender_list, 'Male')
+female = reinvent_count(gender_list, 'Female')
 
 # Verificando o resultado
 print("\nTAREFA 4: Imprimindo quantos masculinos e femininos nós encontramos")
@@ -115,8 +149,8 @@ def count_gender(data_list: list) -> list:
     :rtype: list
     """
     gender_list = column_to_list(data_list, -2)
-    male = gender_list.count('Male')
-    female = gender_list.count('Female')
+    male = reinvent_count(gender_list, 'Male')
+    female = reinvent_count(gender_list, 'Female')
     return [male, female]
 
 
@@ -177,7 +211,7 @@ input("Aperte Enter para continuar...")
 print("\nTAREFA 7: Verifique o gráfico!")
 user_type_list = column_to_list(data_list, -3)
 user_type_types = sorted(set(user_type_list))
-user_type_quantity = [user_type_list.count(user_type) for user_type in user_type_types]
+user_type_quantity = [reinvent_count(user_type_list, user_type) for user_type in user_type_types]
 user_type_y_pos = list(range(len(user_type_types)))
 plt.bar(user_type_y_pos, user_type_quantity)
 plt.ylabel('Quantidade')
@@ -206,7 +240,7 @@ input("Aperte Enter para continuar...")
 # Você não deve usar funções prontas para isso, como max() e min().
 trip_duration_list = column_to_list(data_list, 2)
 trip_duration_list_sorted = sorted(list(map(int, trip_duration_list)))
-trip_duration_sum = sum(trip_duration_list_sorted)
+trip_duration_sum = reinvent_sum(trip_duration_list_sorted)
 trip_duration_qty = len(trip_duration_list_sorted)
 min_trip = trip_duration_list_sorted[0]
 max_trip = trip_duration_list_sorted[-1]
@@ -272,7 +306,7 @@ def count_items(column_list: list) -> tuple:
     :rtype: tuple
     """
     item_types = list(set(column_list))
-    count_items = [column_list.count(item_type) for item_type in item_types]
+    count_items = [reinvent_count(column_list, item_type) for item_type in item_types]
     return item_types, count_items
 
 
