@@ -6,3 +6,4 @@ pkg-resources==0.0.0
 pyparsing==2.3.0
 python-dateutil==2.7.5
 six==1.11.0
+tk==8.6
